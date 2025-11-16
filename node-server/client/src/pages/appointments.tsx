@@ -39,7 +39,7 @@ export default function Appointments() {
     appointmentTime: "",
     type: "virtual",
     notes: "",
-    userId: "user-1",
+    patient_id: "70569c2f-8cb2-4272-bd44-67a94433dab7",
     status: "pending",
     doctorAvatar: null,
   });
@@ -51,7 +51,19 @@ export default function Appointments() {
 
   const createMutation = useMutation({
     mutationFn: async (data: Partial<InsertAppointment>) => {
-      return apiRequest("POST", "/api/appointments", data);
+     
+      console.log(data);
+      
+      return apiRequest("POST", "/api/appointments", {
+        speciality: data.doctorSpecialty,
+        doctor_name: data.doctorName,
+        app_date: data.appointmentDate,
+        app_time: data.appointmentTime,
+        appointment__type: data.type,
+        note: data.notes,
+        patient_id: data.patient_id,
+        status: data.status,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
@@ -63,7 +75,7 @@ export default function Appointments() {
         appointmentTime: "",
         type: "virtual",
         notes: "",
-        userId: "user-1",
+        patient_id: "70569c2f-8cb2-4272-bd44-67a94433dab7",
         status: "pending",
         doctorAvatar: null,
       });
