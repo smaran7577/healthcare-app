@@ -3,10 +3,10 @@ const createAppsTable = `
 
   CREATE TABLE IF NOT EXISTS appointments (
     id UUID PRIMARY KEY,
-    patient_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL,
     speciality text not null,
-    doctor_name varchar(256) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    appointment_time TIMESTAMPTZ NOT NULL,
+    doctor_name varchar(256) NOT NULL   ,
+    appointment_time TIMESTAMPTZ,
     appointment__type text,
     app_date DATE,
     app_time TIME,
